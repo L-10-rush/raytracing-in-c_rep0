@@ -11,6 +11,7 @@
 #define COLOUR_WHITE 0xFFFFFFFF
 #define COLOUR_BLACK 0x00000000
 #define COLOUR_GRAY 0x808080
+#define COLOUR_YELLOW 0xFFFF00 
 #define RAY_NUMBER 100
 
 struct Circle{
@@ -70,8 +71,8 @@ void FillRays(SDL_Surface * surface, Ray rays[RAY_NUMBER],struct Circle object, 
     while(!end_of_screen && !object_hit){
       
       //Ray ray = rays[i];
-      x_draw += step*cos(ray.angle); // + ray.x_start
-      y_draw += step*sin(ray.angle); //+ ray.y_start
+      x_draw += i*cos(ray.angle) + ray.x_start;
+      y_draw += i*sin(ray.angle)+ ray.y_start;
       SDL_Rect pixel = {x_draw, y_draw, 1, 1};
       SDL_FillRect(surface, &pixel, color);
       if(x_draw < 0 || x_draw > width ){
@@ -80,8 +81,8 @@ void FillRays(SDL_Surface * surface, Ray rays[RAY_NUMBER],struct Circle object, 
       if(y_draw < 0 || y_draw > height){
         end_of_screen = 1;
       }
-      double diatance_squares = pow(x_draw - object.x, 2) + pow(y_draw - object.y, 2);
-      if(diatance_squares < r2){
+      double distance_squares = pow(x_draw - object.x, 2) + pow(y_draw - object.y, 2);
+      if(distance_squares < r2){
         object_hit = 1;
       }
       
@@ -126,7 +127,7 @@ int main(){
     SDL_FillRect(surface, &earse_rect , COLOUR_BLACK);
     FillCircle(surface, circle, COLOUR_WHITE);
     FillCircle(surface, shadow_circle, COLOUR_WHITE);
-    FillRays(surface, rays, shadow_circle, COLOUR_GRAY);
+    FillRays(surface, rays, shadow_circle, COLOUR_YELLOW);
     SDL_UpdateWindowSurface(window);
 
     SDL_Delay(10);
