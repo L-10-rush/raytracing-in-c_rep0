@@ -1,4 +1,4 @@
-# raytracing-in-c_rep0
+# Shadowtracing-in-c_rep0
 wanted to explore physic and Math using coding 
 
 to run :
